@@ -1,0 +1,3 @@
+http://finance.yahoo.com/d/quotes.csv?s=msft&f=price
+
+https://ilmusaham.wordpress.com/tag/stock-yahoo-data/
