@@ -49,10 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuStockContext.cs" />
+    <Compile Include="BuStockDbContext.cs" />
+    <Compile Include="BuStockEntityInitializer.cs" />
     <Compile Include="DbContextFactory.cs" />
-    <Compile Include="DownAlert.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="Mapping\DownAlertMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
   </ItemGroup>

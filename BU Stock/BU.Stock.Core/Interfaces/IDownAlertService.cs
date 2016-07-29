@@ -11,7 +11,7 @@ namespace BU.Stock.Core.Interfaces
     {
         decimal GetCurrentPrice(string symbol);
         bool IsHighestPrice(decimal currentPrice);
-        bool SaveHighestPrice(DownAlertModel downAlertModel);
+        bool SaveHighestPrice(DownAlert downAlertModel);
         bool SendAlert();
     }
 }

@@ -29,13 +29,12 @@ namespace BU.Stock.Service
             throw new NotImplementedException();
         }
 
-        public bool SaveHighestPrice(DownAlertModel downAlertModel)
+        public bool SaveHighestPrice(DownAlert downAlert)
         {
             bool result = false;
 
             try
             {
-                DownAlert downAlert = Mapper.Map<DownAlert>(downAlertModel);
                 _downAlertRepository.Insert(downAlert);
                 _downAlertRepository.Save();
 

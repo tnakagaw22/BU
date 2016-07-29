@@ -25,7 +25,12 @@ namespace BU.Stock.Test.IntegrationTests
                 IRepository<DownAlert> downAlertRepository = new Repository<DownAlert>(dbContext);
                 IDownAlertService downAlertService = new DownAlertService(downAlertRepository);
 
-                DownAlertModel downAlertModel = new DownAlertModel();
+                DownAlert downAlertModel = new DownAlert()
+                {
+                    Symbol = "MSFT",
+                    HighestPrice = 56.21m,
+                    HighestPriceDate = DateTime.Now
+                };
                 downAlertService.SaveHighestPrice(downAlertModel);
             }
         }

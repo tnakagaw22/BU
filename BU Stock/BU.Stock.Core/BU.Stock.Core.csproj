@@ -53,7 +53,8 @@
     <Compile Include="Interfaces\IDbContextFactory.cs" />
     <Compile Include="Interfaces\IDownAlertService.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Models\DownAlertModel.cs" />
+    <Compile Include="Models\DownAlert.cs" />
+    <Compile Include="Models\Entity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

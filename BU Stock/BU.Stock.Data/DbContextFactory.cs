@@ -14,7 +14,7 @@ namespace BU.Stock.Data
 
         public DbContextFactory()
         {
-            _dbContext = new BuStockContext();
+            _dbContext = new BuStockDbContext();
         }
 
         public DbContext GetContext()
