@@ -49,12 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Interfaces\IDbContextFactory.cs" />
     <Compile Include="Interfaces\IDownAlertService.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Models\DownAlert.cs" />
     <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\SP500.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

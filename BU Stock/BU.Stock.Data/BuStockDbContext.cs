@@ -18,6 +18,7 @@ namespace BU.Stock.Data
             Database.SetInitializer(new BuStockEntityInitializer());
         }
         public DbSet<DownAlert> DownAlerts { get; set; }
+        public DbSet<SP500> SP500s { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
