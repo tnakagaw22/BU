@@ -1,0 +1,5 @@
+In Package Manager Console, set the project "Bu.Stock.Data". If data project does not have "Migrations" folder, run enable-migrations
+
+1. Change Database
+2. run add-migration DownAlertTickerSymbol
+3. run update-database

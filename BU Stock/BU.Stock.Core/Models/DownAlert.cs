@@ -8,7 +8,7 @@ namespace BU.Stock.Core.Models
 {
     public class DownAlert : Entity
     {
-        public string Symbol { get; set; }
+        public string TickerSymbol { get; set; }
         public decimal HighestPrice { get; set; }
         public DateTime HighestPriceDate { get; set; }
     }

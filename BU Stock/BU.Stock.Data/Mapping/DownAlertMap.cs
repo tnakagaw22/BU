@@ -17,7 +17,7 @@ namespace BU.Stock.Data.Mapping
 
             Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            Property(t => t.Symbol)
+            Property(t => t.TickerSymbol)
                 .IsRequired()
                 .HasMaxLength(10);
 
