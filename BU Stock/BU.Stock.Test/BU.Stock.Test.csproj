@@ -86,6 +86,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="IntegrationTests\DownAlertIT.cs" />
+    <Compile Include="IntegrationTests\YahooStockServiceIT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
