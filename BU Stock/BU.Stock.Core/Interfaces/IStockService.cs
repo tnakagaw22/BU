@@ -8,6 +8,6 @@ namespace BU.Stock.Core.Interfaces
 {
     public interface IStockService
     {
-        decimal GetCurrentPrice(string symbol);
+        Task<decimal> GetCurrentPrice(string symbol);
     }
 }

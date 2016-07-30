@@ -13,12 +13,12 @@ namespace BU.Stock.Test.IntegrationTests
     {
         [TestCategory("Integration")]
         [TestMethod]
-        public void GetCurrentPrice_WhenInputIsValid_ReturnCurrentPrice()
+        public async Task GetCurrentPrice_WhenInputIsValid_ReturnCurrentPrice()
         {
             string tickerSymbol = "MSFT";
             var stockService = new YahooStockService();
 
-            var result = stockService.GetCurrentPrice(tickerSymbol);
+            var result = await stockService.GetCurrentPrice(tickerSymbol);
 
             Assert.IsTrue(result > 0);
         }
@@ -26,12 +26,12 @@ namespace BU.Stock.Test.IntegrationTests
         [TestCategory("Integration")]
         [TestMethod]
         //[ExpectedException(typeof(Exception))]
-        public void GetCurrentPrice_WhenInputIsNOTValid_ReturnCurrentPrice()
+        public async Task GetCurrentPrice_WhenInputIsNOTValid_ReturnCurrentPrice()
         {
             string tickerSymbol = "test?<L\"%%@";
             var stockService = new YahooStockService();
 
-            var result = stockService.GetCurrentPrice(tickerSymbol);
+            var result = await stockService.GetCurrentPrice(tickerSymbol);
 
             Assert.IsTrue(result == 0);
         }

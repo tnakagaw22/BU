@@ -26,27 +26,27 @@ namespace BU.Stock.Test.UnitTests
 
         [TestCategory("Unit")]
         [TestMethod]
-        public void GetCurrentPrice_WhenStockServiceReturnsCurrentPrice_ReturnCurrentPrice()
+        public async Task GetCurrentPrice_WhenStockServiceReturnsCurrentPrice_ReturnCurrentPrice()
         {
             string tickerSymbol = "MSFT";
-            decimal currentPrice = 44m;
-            _stockService.Setup(p => p.GetCurrentPrice(tickerSymbol)).Returns(currentPrice);
+            //Task<decimal> currentPrice = 44m;
+            _stockService.Setup(p => p.GetCurrentPrice(tickerSymbol)).Returns(Task.FromResult(44m));
             var stockService = new DownAlertService(_repoDownAlert.Object, _stockService.Object);
 
-            var result = stockService.GetCurrentPrice(tickerSymbol);
+            var result = await stockService.GetCurrentPrice(tickerSymbol);
 
             Assert.IsTrue(result > 0);
         }
 
         [TestCategory("Unit")]
         [TestMethod]
-        public void GetCurrentPrice_WhenStockServiceThrowsError_Return0()
+        public async Task GetCurrentPrice_WhenStockServiceThrowsError_Return0()
         {
             string tickerSymbol = "MSFT";
             _stockService.Setup(p => p.GetCurrentPrice(It.IsAny<string>())).Throws(new Exception("test exception"));
             var stockService = new DownAlertService(_repoDownAlert.Object, _stockService.Object);
 
-            var result = stockService.GetCurrentPrice(tickerSymbol);
+            var result = await stockService.GetCurrentPrice(tickerSymbol);
 
             Assert.IsTrue(result == 0);
         }

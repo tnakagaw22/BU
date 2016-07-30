@@ -9,7 +9,7 @@ namespace BU.Stock.Core.Interfaces
 {
     public interface IDownAlertService
     {
-        decimal GetCurrentPrice(string symbol);
+        Task<decimal> GetCurrentPrice(string symbol);
         bool IsHighestPrice(decimal currentPrice);
         bool SaveHighestPrice(DownAlert downAlertModel);
         bool SendAlert();
