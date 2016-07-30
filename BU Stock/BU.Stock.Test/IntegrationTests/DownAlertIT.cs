@@ -27,7 +27,7 @@ namespace BU.Stock.Test.IntegrationTests
 
                 DownAlert downAlertModel = new DownAlert()
                 {
-                    Symbol = "MSFT",
+                    TickerSymbol = "MSFT",
                     HighestPrice = 56.21m,
                     HighestPriceDate = DateTime.Now
                 };

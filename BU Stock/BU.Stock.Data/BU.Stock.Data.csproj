@@ -52,11 +52,14 @@
     <Compile Include="BuStockDbContext.cs" />
     <Compile Include="BuStockEntityInitializer.cs" />
     <Compile Include="DbContextFactory.cs" />
-    <Compile Include="Entity.cs" />
     <Compile Include="Mapping\DownAlertMap.cs" />
     <Compile Include="Migrations\201607290357158_InitialCreate.cs" />
     <Compile Include="Migrations\201607290357158_InitialCreate.Designer.cs">
       <DependentUpon>201607290357158_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607300332039_DownAlertTickerSymbol.cs" />
+    <Compile Include="Migrations\201607300332039_DownAlertTickerSymbol.Designer.cs">
+      <DependentUpon>201607300332039_DownAlertTickerSymbol.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +78,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607290357158_InitialCreate.resx">
       <DependentUpon>201607290357158_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607300332039_DownAlertTickerSymbol.resx">
+      <DependentUpon>201607300332039_DownAlertTickerSymbol.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
