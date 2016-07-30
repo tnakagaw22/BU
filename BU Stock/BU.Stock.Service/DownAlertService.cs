@@ -21,13 +21,13 @@ namespace BU.Stock.Service
             _stockService = stockService;
         }
 
-        public decimal GetCurrentPrice(string symbol)
+        public async Task<decimal> GetCurrentPrice(string symbol)
         {
             decimal result = 0m;
 
             try
             {
-                result =  _stockService.GetCurrentPrice(symbol);
+                result =  await _stockService.GetCurrentPrice(symbol);
             }
             catch (Exception ex)
             {

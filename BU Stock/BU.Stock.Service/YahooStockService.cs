@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,14 +15,14 @@ namespace BU.Stock.Service
     {
         private readonly string yahooStockQuoteUrl = "http://finance.yahoo.com/d/quotes.csv";
 
-        public decimal GetCurrentPrice(string symbol)
+        public async Task<decimal> GetCurrentPrice(string symbol)
         {
-            string targetUrl = $"{yahooStockQuoteUrl}?s={symbol}&f=price";
+            Uri stockUri = new Uri($"{yahooStockQuoteUrl}?s={symbol}&f=price");
             decimal currentPrice = 0m;
 
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
-                var content = client.DownloadString(targetUrl);
+                string content = await client.GetStringAsync(stockUri);
                 var values = content.Split(',');
 
                 decimal.TryParse(values[0], out currentPrice);
