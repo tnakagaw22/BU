@@ -20,23 +20,16 @@ namespace BU.Stock.Service
             string targetUrl = $"{yahooStockQuoteUrl}?s={symbol}&f=price";
             decimal currentPrice = 0m;
 
-            try
+            using (var client = new WebClient())
             {
-                using (var client = new WebClient())
-                {
-                    var content = client.DownloadString(targetUrl);
-                    var values = content.Split(',');
+                var content = client.DownloadString(targetUrl);
+                var values = content.Split(',');
 
-                    decimal.TryParse(values[0], out currentPrice);
+                decimal.TryParse(values[0], out currentPrice);
 
-                    return currentPrice;
-                }
+                return currentPrice;
             }
-            catch (Exception ex)
-            {
-                // TODO error handling
-                throw;
-            }
+
         }
     }
 }

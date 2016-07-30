@@ -13,15 +13,29 @@ namespace BU.Stock.Service
     public class DownAlertService : IDownAlertService
     {
         private IRepository<DownAlert> _downAlertRepository;
+        private IStockService _stockService;
 
-        public DownAlertService(IRepository<DownAlert> downAlertRepository)
+        public DownAlertService(IRepository<DownAlert> downAlertRepository, IStockService stockService)
         {
             _downAlertRepository = downAlertRepository;
+            _stockService = stockService;
         }
 
         public decimal GetCurrentPrice(string symbol)
         {
-            throw new NotImplementedException();
+            decimal result = 0m;
+
+            try
+            {
+                result =  _stockService.GetCurrentPrice(symbol);
+            }
+            catch (Exception ex)
+            {
+                // TODO log exception
+                result = 0;
+            }
+
+            return result;
         }
 
         public bool IsHighestPrice(decimal currentPrice)

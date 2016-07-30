@@ -22,8 +22,9 @@ namespace BU.Stock.Test.IntegrationTests
             {
                 var dbContext = dbContextFactory.GetContext();
 
+                IStockService stockService = new YahooStockService();
                 IRepository<DownAlert> downAlertRepository = new Repository<DownAlert>(dbContext);
-                IDownAlertService downAlertService = new DownAlertService(downAlertRepository);
+                IDownAlertService downAlertService = new DownAlertService(downAlertRepository, stockService);
 
                 DownAlert downAlertModel = new DownAlert()
                 {
