@@ -88,6 +88,7 @@
     <Compile Include="IntegrationTests\DownAlertIT.cs" />
     <Compile Include="IntegrationTests\YahooStockServiceIT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\DownAlertUT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

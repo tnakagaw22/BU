@@ -25,9 +25,10 @@ namespace BU.Stock.Test.IntegrationTests
 
         [TestCategory("Integration")]
         [TestMethod]
+        //[ExpectedException(typeof(Exception))]
         public void GetCurrentPrice_WhenInputIsNOTValid_ReturnCurrentPrice()
         {
-            string tickerSymbol = "test";
+            string tickerSymbol = "test?<L\"%%@";
             var stockService = new YahooStockService();
 
             var result = stockService.GetCurrentPrice(tickerSymbol);
