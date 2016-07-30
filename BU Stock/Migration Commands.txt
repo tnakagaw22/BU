@@ -3,3 +3,4 @@ In Package Manager Console, set the project "Bu.Stock.Data". If data project doe
 1. Change Database
 2. run add-migration DownAlertTickerSymbol
 3. run update-database
+4. If you want to revert the database, run update-database -targetmigration:DownAlertTickerSymbol
