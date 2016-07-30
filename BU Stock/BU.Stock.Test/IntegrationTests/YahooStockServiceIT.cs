@@ -39,10 +39,10 @@ namespace BU.Stock.Test.IntegrationTests
         [TestCategory("Integration")]
         [TestMethod]
         //[ExpectedException(typeof(Exception))]
-        public void GetCurrentPrice_WhenMultipleRequestsAreMade_ReturnTheirCurrentPrice()
+        public async Task GetCurrentPrice_WhenMultipleRequestsAreMade_ReturnTheirCurrentPrice()
         {
-            string tickerSymbol = "MSFT";
             List<string> tickerSymbolList = new List<string>();
+            #region Add Ticker Symbols
             tickerSymbolList.Add("MSFT");
             tickerSymbolList.Add("MMM");
             tickerSymbolList.Add("ABT ");
@@ -196,12 +196,13 @@ namespace BU.Stock.Test.IntegrationTests
             tickerSymbolList.Add("ADSK");
             tickerSymbolList.Add("ADP ");
             tickerSymbolList.Add("AZO");
+            #endregion
 
             var stockService = new YahooStockService();
 
             foreach (var item in tickerSymbolList)
             {
-                var result = stockService.GetCurrentPrice(item);
+                var result = await stockService.GetCurrentPrice(item);
 
             }
             Assert.IsTrue(true);
