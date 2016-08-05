@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BU.Stock.Core.Interfaces
 {
-    public interface IRepository<T>
+    public interface ICrudService<T>
     {
         T GetById(int id);
         IQueryable<T> GetAll();
         IQueryable<T> Where(Expression<Func<T, bool>> predicate);
-        T Insert(T entity);
+        int Insert(T entity);
         void Delete(T entity);
-        //void Save();
+        //Task<int> SaveAsync();
     }
 }

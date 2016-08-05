@@ -35,5 +35,33 @@ namespace BU.Stock.Test.IntegrationTests
                 downAlertService.SaveHighestPrice(downAlertModel);
             }
         }
+
+        [TestCategory("Performance")]
+        [TestCategory("Integration")]
+        [TestMethod]
+        public async Task SaveDownAlertList_Save10000RecordsAsynchronously()
+        {
+            List<DownAlert> downAlertList = new List<DownAlert>();
+            for (int i = 0; i < 10000; i++)
+            {
+                downAlertList.Add(new DownAlert()
+                {
+                    TickerSymbol = "MSFT",
+                    HighestPrice = 56.21m,
+                    HighestPriceDate = DateTime.Now
+                });
+            }
+
+            DownAlertProcesser downAlertProcesser = new DownAlertProcesser();
+            List<Task<int>> taskList = new List<Task<int>>();
+            foreach (var item in downAlertList)
+            {
+                taskList.Add(downAlertProcesser.Run(item));
+            }
+            await Task.WhenAll(taskList);
+
+            //await downAlertProcesser.Run(downAlertList);
+        }
+
     }
 }

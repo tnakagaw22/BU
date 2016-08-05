@@ -18,10 +18,10 @@ namespace BU.Stock.Data
             _dbContext = dbContext;
         }
 
-        public void Save()
-        {
-            _dbContext.SaveChanges();
-        }
+        //public void Save()
+        //{
+        //    _dbContext.SaveChanges();
+        //}
 
         public T Insert(T entity)
         {
@@ -34,7 +34,7 @@ namespace BU.Stock.Data
             _dbContext.Set<T>().Remove(entity);
         }
 
-        public T GetById(Guid id)
+        public T GetById(int id)
         {
             return _dbContext.Set<T>().Find(id);
         }
