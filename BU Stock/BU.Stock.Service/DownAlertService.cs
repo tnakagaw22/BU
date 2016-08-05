@@ -12,6 +12,7 @@ namespace BU.Stock.Service
 {
     public class DownAlertService : IDownAlertService
     {
+        private UnitOfWork _unitOfWork = new UnitOfWork();
         private IRepository<DownAlert> _downAlertRepository;
         private IStockService _stockService;
 
@@ -49,8 +50,10 @@ namespace BU.Stock.Service
 
             try
             {
+                //_unitOfWork.DownAlertRepository.Insert(downAlert);
+                //_unitOfWork.Save();
                 _downAlertRepository.Insert(downAlert);
-                _downAlertRepository.Save();
+                //_downAlertRepository.Save();
 
                 result = true;
             }

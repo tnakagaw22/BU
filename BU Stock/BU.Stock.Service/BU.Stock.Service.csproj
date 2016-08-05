@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrudService.cs" />
+    <Compile Include="DownAlertProcesser.cs" />
     <Compile Include="DownAlertService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="YahooStockService.cs" />
