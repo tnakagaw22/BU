@@ -10,10 +10,12 @@ namespace BU.Stock.Core.Interfaces
     public interface IRepository<T>
     {
         T GetById(int id);
-        IQueryable<T> GetAll();
-        IQueryable<T> Where(Expression<Func<T, bool>> predicate);
+        IEnumerable<T> Get(Expression<Func<T, bool>> filter = null,
+                           Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                           string includeProperties = "");
         T Insert(T entity);
-        void Delete(T entity);
-        //void Save();
+        void Delete(int id);
+        void Delete(T entityToDelete);
+        void Update(T entityToUpdate);
     }
 }

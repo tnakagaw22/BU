@@ -12,42 +12,71 @@ namespace BU.Stock.Data
     public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly DbContext _dbContext;
+        private DbSet<T> _dbSet;
 
         public Repository(DbContext dbContext)
         {
             _dbContext = dbContext;
-        }
-
-        //public void Save()
-        //{
-        //    _dbContext.SaveChanges();
-        //}
-
-        public T Insert(T entity)
-        {
-            _dbContext.Set<T>().Add(entity);
-            return entity;
-        }
-
-        public virtual void Delete(T entity)
-        {
-            _dbContext.Set<T>().Remove(entity);
+            _dbSet = _dbContext.Set<T>();
         }
 
         public T GetById(int id)
         {
-            return _dbContext.Set<T>().Find(id);
+            return _dbSet.Find(id);
         }
 
-        public virtual IQueryable<T> Where(Expression<Func<T, bool>> predicate)
+        public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null,
+                                 Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                 string includeProperties = "")
         {
-            return _dbContext.Set<T>().Where(predicate);
+            IQueryable<T> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                return orderBy(query).ToList();
+            }
+            else
+            {
+                return query.ToList();
+            }
         }
 
-        public virtual IQueryable<T> GetAll()
+        public T Insert(T entity)
         {
-            return _dbContext.Set<T>();
+            _dbSet.Add(entity);
+            return entity;
         }
 
+        public virtual void Delete(T entityToDelete)
+        {
+            if (_dbContext.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                _dbSet.Attach(entityToDelete);
+            }
+            _dbSet.Remove(entityToDelete);
+        }
+
+        public void Delete(int id)
+        {
+            T entityToDelete = _dbSet.Find(id);
+            Delete(entityToDelete);
+        }
+
+        public void Update(T entityToUpdate)
+        {
+            _dbSet.Attach(entityToUpdate);
+            _dbContext.Entry(entityToUpdate).State = EntityState.Modified;
+        }
     }
 }
