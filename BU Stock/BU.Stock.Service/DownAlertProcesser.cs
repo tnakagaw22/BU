@@ -19,6 +19,37 @@ namespace BU.Stock.Service
             {
                 IStockService stockService = new YahooStockService();
                 IDownAlertService downAlertService = new DownAlertService(unitOfWork.DownAlertRepository, stockService);
+
+                string symbol = "MSFT";
+                // GetCurrentPrice from yahoo API
+                var currentPrice = downAlertService.GetCurrentPrice(symbol);
+                // GetHighestPrice from db
+                var highestPrice = downAlertService.GetHighestPrice(symbol);
+
+                await Task.WhenAll(currentPrice, highestPrice);
+                // Current 20% less than Highest -> send alert
+                // Current > Highest -> Update
+
+                if (highestPrice.Result == null)
+                {
+                // Highest == null -> Insert
+                    var downAlert = new DownAlert()
+                    {
+                        HighestPrice = currentPrice.Result,
+                        HighestPriceDate = DateTime.Now,
+                        TickerSymbol = symbol
+                    };
+                    downAlertService.SaveHighestPrice(downAlert);
+                }
+                else
+                {
+                    var updateResult = downAlertService.UpdateHighestPrice(currentPrice.Result);
+
+                    if (downAlertService.NeedToSendAlert(currentPrice.Result, highestPrice.Result.Value))
+                        downAlertService.SendAlert();
+
+                    await updateResult;
+                }
                 downAlertService.SaveHighestPrice(downAlertModel);
                 result = await unitOfWork.SaveAsync();
             }

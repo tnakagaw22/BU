@@ -50,6 +50,7 @@ namespace BU.Stock.Service
 
             try
             {
+
                 //_unitOfWork.DownAlertRepository.Insert(downAlert);
                 //_unitOfWork.Save();
                 _downAlertRepository.Insert(downAlert);
@@ -67,6 +68,26 @@ namespace BU.Stock.Service
         }
 
         public bool SendAlert()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<decimal?> GetHighestPrice(string symbol)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> IDownAlertService.IsHighestPrice(decimal currentPrice)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateHighestPrice(decimal currentPrice)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool NeedToSendAlert(decimal currentPrice, decimal highestPrice)
         {
             throw new NotImplementedException();
         }
