@@ -10,8 +10,7 @@ namespace BU.Stock.Core.Interfaces
     public interface IDownAlertService
     {
         Task<decimal> GetCurrentPrice(string symbol);
-        Task<decimal?> GetHighestPrice(string symbol);
-        Task<bool> IsHighestPrice(decimal currentPrice);
+        bool IsHighestPrice(string symbol, decimal currentPrice);
         Task UpdateHighestPrice(decimal currentPrice);
         bool NeedToSendAlert(decimal currentPrice, decimal highestPrice);
         bool SaveHighestPrice(DownAlert downAlertModel);

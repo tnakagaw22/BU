@@ -9,5 +9,6 @@ namespace BU.Stock.Core.Interfaces
     public interface IStockService
     {
         Task<decimal> GetCurrentPrice(string symbol);
+        Task<decimal> GetChangePercentageFromDaysHigh(string symbol);
     }
 }

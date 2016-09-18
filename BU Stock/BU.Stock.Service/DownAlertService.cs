@@ -39,9 +39,13 @@ namespace BU.Stock.Service
             return result;
         }
 
-        public bool IsHighestPrice(decimal currentPrice)
+        public bool IsHighestPrice(string symbol, decimal currentPrice)
         {
-            throw new NotImplementedException();
+            var priceInDb =_downAlertRepository.Get(p => p.TickerSymbol == symbol).FirstOrDefault();
+            if (priceInDb == null)
+                return true;
+
+            return currentPrice > priceInDb.HighestPrice;
         }
 
         public bool SaveHighestPrice(DownAlert downAlert)
@@ -68,16 +72,6 @@ namespace BU.Stock.Service
         }
 
         public bool SendAlert()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<decimal?> GetHighestPrice(string symbol)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<bool> IDownAlertService.IsHighestPrice(decimal currentPrice)
         {
             throw new NotImplementedException();
         }

@@ -23,16 +23,13 @@ namespace BU.Stock.Service
                 string symbol = "MSFT";
                 // GetCurrentPrice from yahoo API
                 var currentPrice = downAlertService.GetCurrentPrice(symbol);
-                // GetHighestPrice from db
-                var highestPrice = downAlertService.GetHighestPrice(symbol);
 
-                await Task.WhenAll(currentPrice, highestPrice);
+                await Task.WhenAll(currentPrice);
                 // Current 20% less than Highest -> send alert
-                // Current > Highest -> Update
 
-                if (highestPrice.Result == null)
+                if (downAlertService.IsHighestPrice(symbol, currentPrice.Result))
                 {
-                // Highest == null -> Insert
+                    // Highest == null -> Insert
                     var downAlert = new DownAlert()
                     {
                         HighestPrice = currentPrice.Result,
@@ -43,9 +40,10 @@ namespace BU.Stock.Service
                 }
                 else
                 {
+                    // Current > Highest -> Update
                     var updateResult = downAlertService.UpdateHighestPrice(currentPrice.Result);
 
-                    if (downAlertService.NeedToSendAlert(currentPrice.Result, highestPrice.Result.Value))
+                    if (downAlertService.NeedToSendAlert(currentPrice.Result, 0m))
                         downAlertService.SendAlert();
 
                     await updateResult;
