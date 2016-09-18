@@ -85,6 +85,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="IntegrationTests\AwsSnsServiceIT.cs" />
     <Compile Include="IntegrationTests\DownAlertIT.cs" />
     <Compile Include="IntegrationTests\RepositoryIT.cs" />
     <Compile Include="IntegrationTests\YahooStockServiceIT.cs" />
