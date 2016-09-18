@@ -207,5 +207,18 @@ namespace BU.Stock.Test.IntegrationTests
             }
             Assert.IsTrue(true);
         }
+
+        [TestCategory("Integration")]
+        [TestMethod]
+        //[ExpectedException(typeof(Exception))]
+        public async Task GetChangeFrom50MovingAverage_WhenInputIsValid_ReturnCurrentPrice()
+        {
+            string tickerSymbol = "MMM";
+            var stockService = new YahooStockService();
+
+            var result = await stockService.GetChangePercentageFromDaysHigh(tickerSymbol);
+
+            Assert.IsFalse(result == 0);
+        }
     }
 }
