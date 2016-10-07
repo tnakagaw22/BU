@@ -1,6 +1,7 @@
 ﻿using Amazon;
 using Amazon.SimpleNotificationService;
 using Amazon.SimpleNotificationService.Model;
+using BU.Stock.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,17 @@ using System.Threading.Tasks;
 
 namespace BU.Stock.Service
 {
-    public class AwsSnsService
+    public class AwsSnsService : AwsBaseService
     {
-        string accessKey = "AKIAJDXEK2NQFZVS6CCA";
-        string secretAccessKey = "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";
-
         public bool PublishMessage(string subject, string body, string topicArn)
         {
-            var sns = new AmazonSimpleNotificationServiceClient(accessKey, secretAccessKey, RegionEndpoint.USWest2);
+            AwsCredentialModel awsCredentialModel = GetAwsCredentials();
+            if (awsCredentialModel == null)
+                return false;
+
+            var sns = new AmazonSimpleNotificationServiceClient(awsCredentialModel.AccessKey,
+                                                                awsCredentialModel.SecretKey,
+                                                                RegionEndpoint.GetBySystemName(awsCredentialModel.RegionEndPoint));
 
             PublishRequest publishRequest = new PublishRequest();
             publishRequest.Subject = subject;
