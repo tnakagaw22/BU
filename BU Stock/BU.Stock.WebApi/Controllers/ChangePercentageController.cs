@@ -22,7 +22,7 @@ namespace BU.Stock.WebApi.Controllers
         }
 
         // GET api/ChangePercentage/MSFT
-        [HttpGet]
+        [HttpPost]
         public async Task<bool> Get()
         {
             var alertSent = false;
