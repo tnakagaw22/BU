@@ -92,8 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
-    <Compile Include="Controllers\ValuesControllerTest.cs" />
+    <Compile Include="Controllers\ChangePercentageControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -102,6 +101,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BU.Stock.Core\BU.Stock.Core.csproj">
+      <Project>{EDD96215-B271-499F-86EF-7DDF842CB37E}</Project>
+      <Name>BU.Stock.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BU.Stock.Service\BU.Stock.Service.csproj">
+      <Project>{19FAAD3F-70C8-4539-8CC2-532DE7945B2A}</Project>
+      <Name>BU.Stock.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BU.Stock.WebApi\BU.Stock.WebApi.csproj">
       <Project>{D1B07C8B-DB4F-4E99-83BA-7DF7F8E673D4}</Project>
       <Name>BU.Stock.WebApi</Name>
