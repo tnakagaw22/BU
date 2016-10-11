@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\IDbContextFactory.cs" />
     <Compile Include="Interfaces\IDownAlertService.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\ISp500TickerService.cs" />
     <Compile Include="Interfaces\IStockService.cs" />
     <Compile Include="Models\AwsCredentialModel.cs" />
     <Compile Include="Models\DownAlert.cs" />
