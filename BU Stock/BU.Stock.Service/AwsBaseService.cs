@@ -1,5 +1,6 @@
 ﻿using BU.Stock.Core.Models;
 using Newtonsoft.Json;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,8 @@ namespace BU.Stock.Service
 
         public AwsCredentialModel GetAwsCredentials()
         {
+            Logger logger = LogManager.GetLogger("foo");
+
             try
             {
                 using (StreamReader r = new StreamReader(_credentialFile))
@@ -29,6 +32,8 @@ namespace BU.Stock.Service
             catch (FileNotFoundException ex)
             {
                 // TODO - notify me
+                logger.Info($"AWS Credential file was not fould : {ex.Message}");
+
                 return null;
             }
         }

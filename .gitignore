@@ -244,3 +244,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 BU Stock/BU.Stock.Service/AwsAccessInfo.json
+BU Stock/AwsAccessInfo.json

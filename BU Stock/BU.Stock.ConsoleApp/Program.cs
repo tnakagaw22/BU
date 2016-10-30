@@ -1,4 +1,5 @@
-﻿using BU.Stock.Service;
+﻿using BU.Stock.Core.Interfaces;
+using BU.Stock.Service;
 using Nito.AsyncEx;
 using NLog;
 using System;
@@ -13,15 +14,39 @@ namespace BU.Stock.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Logger logger = LogManager.GetLogger("foo");
-            logger.Info("Program started");
-            AsyncContext.Run(() => MainAsync(args));
+            IStockService stockService = new YahooStockService();
+            ISp500TickerService sp500TickerServicee = new Sp500TickerService();
+
+            AsyncContext.Run(() =>
+            {
+
+                var tickerSymbols = sp500TickerServicee.GetSp500Tickers();
+                foreach (var tickerSymbol in tickerSymbols)
+                {
+                    MainAsync(args, tickerSymbol, stockService);
+                }
+            });
         }
 
-        static async void MainAsync(string[] args)
+        static async void MainAsync(string[] args, string tickerSymbol, IStockService stockService)
         {
-            var yahooService = new YahooStockService();
-            await yahooService.GetCurrentPrice("MSFT");
+            Logger logger = LogManager.GetLogger("foo");
+            logger.Info($"Main started for {tickerSymbol}");
+
+            var alertSent = false;
+            AwsSnsService snsService = new AwsSnsService();
+
+            var changeInPercentage = await stockService.GetChangePercentageFromDaysHigh(tickerSymbol);
+            logger.Info($"Change % is {changeInPercentage} for {tickerSymbol}.");
+
+            decimal changeTrigger = 10m;
+            if (changeInPercentage > changeTrigger)
+                alertSent = snsService.PublishMessage($"Down Alert {changeTrigger}",
+                                           $"{tickerSymbol} is down {changeTrigger} % from today's high.",
+                                            "arn:aws:sns:us-west-2:767567474540:StockAlert");
+
+            logger.Info($"Alert for {tickerSymbol} is sent : {alertSent}.");
+
         }
     }
 }
