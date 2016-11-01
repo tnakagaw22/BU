@@ -13,25 +13,25 @@ namespace BU.Stock.Test.IntegrationTests
     [TestClass]
     public class RepositoryIT
     {
-        [TestCategory("Integration")]
-        [TestMethod]
-        public void Get()
-        {
-            using (IDbContextFactory dbContextFactory = new DbContextFactory())
-            {
-                var dbContext = dbContextFactory.GetContext();
-                Repository<DownAlert> repo = new Repository<DownAlert>(dbContext);
-                repo.Insert(new DownAlert()
-                {
-                    TickerSymbol = "TEST",
-                    HighestPrice = 123m,
-                    HighestPriceDate = DateTime.Now
-                });
+        //[TestCategory("Integration")]
+        //[TestMethod]
+        //public void Get()
+        //{
+        //    using (IDbContextFactory dbContextFactory = new DbContextFactory())
+        //    {
+        //        var dbContext = dbContextFactory.GetContext();
+        //        Repository<DownAlert> repo = new Repository<DownAlert>(dbContext);
+        //        repo.Insert(new DownAlert()
+        //        {
+        //            TickerSymbol = "TEST",
+        //            HighestPrice = 123m,
+        //            HighestPriceDate = DateTime.Now
+        //        });
 
-                var downAlert = repo.Get(p => p.TickerSymbol == "a").FirstOrDefault();
+        //        var downAlert = repo.Get(p => p.TickerSymbol == "a").FirstOrDefault();
 
-            }
-        }
+        //    }
+        //}
 
     }
 }

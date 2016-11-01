@@ -42,7 +42,7 @@ namespace BU.Stock.ConsoleApp
             decimal changeTrigger = 10m;
             if (changeInPercentage > changeTrigger)
                 alertSent = snsService.PublishMessage($"Down Alert {changeTrigger}",
-                                           $"{tickerSymbol} is down {changeTrigger} % from today's high.",
+                                           $"{tickerSymbol} is down {changeInPercentage} % from today's high.",
                                             "arn:aws:sns:us-west-2:767567474540:StockAlert");
 
             logger.Info($"Alert for {tickerSymbol} is sent : {alertSent}.");
