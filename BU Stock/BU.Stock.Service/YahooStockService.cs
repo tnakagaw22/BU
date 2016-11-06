@@ -17,6 +17,8 @@ namespace BU.Stock.Service
         private readonly string yahooStockQuoteUrl = "http://finance.yahoo.com/d/quotes.csv";
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        public string ApiUrl { get; set; }
+
         public async Task<decimal> GetCurrentPrice(string symbol)
         {
             logger.Info($"start downloading price {symbol}");

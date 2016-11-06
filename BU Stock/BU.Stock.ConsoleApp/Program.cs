@@ -1,9 +1,11 @@
 ﻿using BU.Stock.Core.Interfaces;
 using BU.Stock.Service;
+using BU.Stock.Service.Configuration;
 using Nito.AsyncEx;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,19 +15,25 @@ namespace BU.Stock.ConsoleApp
     class Program
     {
         static void Main(string[] args)
-        {
-            IStockService stockService = new YahooStockService();
-            ISp500TickerService sp500TickerServicee = new Sp500TickerService();
+        {            
+            IConfigurationFactory configurationFactory = new ConfigurationFactory();
+            IStockService stockService = configurationFactory.GetStockService();
 
-            AsyncContext.Run(() =>
-            {
+            Console.WriteLine(stockService.ApiUrl);
+            Console.ReadLine();
 
-                var tickerSymbols = sp500TickerServicee.GetSp500Tickers();
-                foreach (var tickerSymbol in tickerSymbols)
-                {
-                    MainAsync(args, tickerSymbol, stockService);
-                }
-            });
+            ////stockService = new YahooStockService();
+            //ISp500TickerService sp500TickerServicee = new Sp500TickerService();
+
+            //AsyncContext.Run(() =>
+            //{
+
+            //    var tickerSymbols = sp500TickerServicee.GetSp500Tickers();
+            //    foreach (var tickerSymbol in tickerSymbols)
+            //    {
+            //        MainAsync(args, tickerSymbol, stockService);
+            //    }
+            //});
         }
 
         static async void MainAsync(string[] args, string tickerSymbol, IStockService stockService)

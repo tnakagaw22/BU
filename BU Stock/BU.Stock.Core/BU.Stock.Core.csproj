@@ -49,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consumers\DownAlertConsumer.cs" />
+    <Compile Include="Interfaces\IConfigurationFactory.cs" />
     <Compile Include="Interfaces\IDbContextFactory.cs" />
+    <Compile Include="Interfaces\IDownAlertConsumer.cs" />
     <Compile Include="Interfaces\IDownAlertService.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\ISp500TickerService.cs" />

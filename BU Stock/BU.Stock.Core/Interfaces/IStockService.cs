@@ -10,5 +10,6 @@ namespace BU.Stock.Core.Interfaces
     {
         Task<decimal> GetCurrentPrice(string symbol);
         Task<decimal> GetChangePercentageFromDaysHigh(string symbol);
+        string ApiUrl { get; set; }
     }
 }
